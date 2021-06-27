@@ -1,5 +1,7 @@
+import { MoviesContainer } from "./styled/styled";
+
 const Favorites = () => {
-  return <div>Favorites</div>;
+  return <MoviesContainer>Favorites</MoviesContainer>;
 };
 
 export default Favorites;

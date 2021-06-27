@@ -1,5 +1,7 @@
+import { MoviesContainer } from "./styled/styled";
+
 const Genres = () => {
-  return <div>Genres</div>;
+  return <MoviesContainer>Genres</MoviesContainer>;
 };
 
 export default Genres;

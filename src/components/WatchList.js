@@ -1,5 +1,7 @@
+import { MoviesContainer } from "./styled/styled";
+
 const WatchList = () => {
-  return <div>Watch Later</div>;
+  return <MoviesContainer>Watch Later</MoviesContainer>;
 };
 
 export default WatchList;

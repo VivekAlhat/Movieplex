@@ -17,7 +17,6 @@ export const StyledSidebar = styled.div`
 `;
 
 export const SidebarOptions = styled.ul`
-  width: 100%;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -39,8 +38,6 @@ export const SidebarLogo = styled.h3`
   height: 3rem;
   padding: 0.5rem 1rem 0;
   font-size: 1.7rem;
-  text-align: center;
-  margin-bottom: 2rem;
   letter-spacing: 2px;
   background: #435560;
 `;
@@ -69,4 +66,20 @@ export const MovieSearchInput = styled.input`
 
 export const SearchButton = styled.button`
   display: none;
+`;
+
+export const MoviesContainer = styled.div`
+  padding: 1.5rem 3rem;
+`;
+
+export const LoadingContainer = styled.div`
+  min-height: calc(100vh - 3rem);
+  display: grid;
+  place-items: center;
+`;
+
+export const MoviesTitle = styled.h1`
+  color: #dddddd;
+  text-align: right;
+  font-size: 2.5rem;
 `;
