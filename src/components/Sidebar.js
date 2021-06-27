@@ -5,6 +5,7 @@ import {
   SidebarLogo,
 } from "./styled/styled";
 import { Link } from "react-router-dom";
+import { WatchLater, Favorite, Subscriptions, Movie } from "@material-ui/icons";
 import styled from "styled-components";
 
 const NavLink = styled(Link)`
@@ -12,34 +13,66 @@ const NavLink = styled(Link)`
   color: inherit;
 `;
 
-const Sidebar = () => {
+const SidebarOptionItemSelected = styled(SidebarOptionItem)`
+  background: #393e46;
+`;
+
+const Sidebar = ({ selected }) => {
   return (
     <StyledSidebar>
       <SidebarLogo>Movieplex</SidebarLogo>
       <SidebarOptions>
         <NavLink to="/">
-          <SidebarOptionItem>Latest</SidebarOptionItem>
-        </NavLink>
-        <NavLink to="/nowplaying">
-          <SidebarOptionItem>Now Playing</SidebarOptionItem>
-        </NavLink>
-        <NavLink to="/popular">
-          <SidebarOptionItem>Popular</SidebarOptionItem>
-        </NavLink>
-        <NavLink to="/toprated">
-          <SidebarOptionItem>Top Rated</SidebarOptionItem>
-        </NavLink>
-        <NavLink to="/upcoming">
-          <SidebarOptionItem>Upcoming</SidebarOptionItem>
+          {selected === "/" ? (
+            <SidebarOptionItemSelected>
+              <Movie />
+              Movies
+            </SidebarOptionItemSelected>
+          ) : (
+            <SidebarOptionItem>
+              <Movie />
+              Movies
+            </SidebarOptionItem>
+          )}
         </NavLink>
         <NavLink to="/genres">
-          <SidebarOptionItem>Genres</SidebarOptionItem>
+          {selected === "/genres" ? (
+            <SidebarOptionItemSelected>
+              <Subscriptions />
+              Genres
+            </SidebarOptionItemSelected>
+          ) : (
+            <SidebarOptionItem>
+              <Subscriptions />
+              Genres
+            </SidebarOptionItem>
+          )}
         </NavLink>
         <NavLink to="/favorites">
-          <SidebarOptionItem>Favorites</SidebarOptionItem>
+          {selected === "/favorites" ? (
+            <SidebarOptionItemSelected>
+              <Favorite />
+              Favorites
+            </SidebarOptionItemSelected>
+          ) : (
+            <SidebarOptionItem>
+              <Favorite />
+              Favorites
+            </SidebarOptionItem>
+          )}
         </NavLink>
         <NavLink to="/watchlist">
-          <SidebarOptionItem>Watch Later</SidebarOptionItem>
+          {selected === "/watchlist" ? (
+            <SidebarOptionItemSelected>
+              <WatchLater />
+              Watch Later
+            </SidebarOptionItemSelected>
+          ) : (
+            <SidebarOptionItem>
+              <WatchLater />
+              Watch Later
+            </SidebarOptionItem>
+          )}
         </NavLink>
       </SidebarOptions>
     </StyledSidebar>

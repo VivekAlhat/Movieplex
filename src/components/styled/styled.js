@@ -25,6 +25,9 @@ export const SidebarOptions = styled.ul`
 `;
 
 export const SidebarOptionItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
   padding: 1rem;
   :hover {

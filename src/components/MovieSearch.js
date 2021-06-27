@@ -3,8 +3,13 @@ import {
   MovieSearchInput,
   SearchButton,
 } from "./styled/styled";
-import { SearchRounded } from "@material-ui/icons";
+import styled from "styled-components";
+import { Search } from "@material-ui/icons";
 import { useState } from "react";
+
+const SearchIcon = styled(Search)`
+  color: white;
+`;
 
 const MovieSearch = () => {
   const [query, setQuery] = useState("");
@@ -20,7 +25,7 @@ const MovieSearch = () => {
 
   return (
     <MovieSearchBar>
-      <SearchRounded />
+      <SearchIcon />
       <form onSubmit={handleSubmit}>
         <MovieSearchInput
           placeholder="Search Movies"
