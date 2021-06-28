@@ -105,6 +105,18 @@ export const MovieImg = styled.img`
 
   :hover {
     transform: scale(1.1);
-    opacity: 0.5;
+    opacity: 0.8;
   }
+`;
+
+export const MovieInfo = styled.div`
+  display: flex;
+`;
+
+export const MovieContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #dddddd;
+  padding: 0 3rem;
 `;
