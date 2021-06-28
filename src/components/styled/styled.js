@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const AppContainer = styled.div`
   position: absolute;
-  height: 100vh;
   min-width: calc(100% - 15rem);
   left: 15rem;
   background: #393e46;
@@ -69,7 +68,9 @@ export const SearchButton = styled.button`
 `;
 
 export const MoviesContainer = styled.div`
-  padding: 1.5rem 3rem;
+  overflow-y: scroll;
+  height: 100vh;
+  padding: 1.5rem 3rem 5rem;
 `;
 
 export const LoadingContainer = styled.div`
@@ -82,4 +83,28 @@ export const MoviesTitle = styled.h1`
   color: #dddddd;
   text-align: right;
   font-size: 2.5rem;
+`;
+
+export const MovieList = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+export const MovieItem = styled.div`
+  overflow: hidden;
+`;
+
+export const MovieImg = styled.img`
+  cursor: pointer;
+  width: 14rem;
+  height: 100%;
+  transition: all linear 200ms;
+
+  :hover {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
 `;

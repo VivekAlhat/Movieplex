@@ -7,6 +7,7 @@ import Genres from "./Genres";
 import Favorites from "./Favorites";
 import WatchList from "./WatchList";
 import MovieSearch from "./MovieSearch";
+import MovieDetails from "./MovieDetails";
 
 function App() {
   let location = useLocation();
@@ -27,6 +28,7 @@ function App() {
           <Route path="/genres" component={Genres} />
           <Route path="/favorites" component={Favorites} />
           <Route path="/watchlist" component={WatchList} />
+          <Route path="/movies/:id" component={MovieDetails} />
         </Switch>
       </AppContainer>
     </>

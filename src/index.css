@@ -10,7 +10,9 @@
 
 body {
   font-family: "Ubuntu", sans-serif;
+  height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 h1,
@@ -24,4 +26,9 @@ h6 {
 
 p {
   font-weight: 400;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
