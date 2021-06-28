@@ -1,6 +1,7 @@
 export const LOAD_MOVIES_PROGRESS = "LOAD_MOVIES_PROGRESS";
 export const LOAD_MOVIES_SUCCESS = "LOAD_MOVIES_SUCCESS";
 export const LOAD_MOVIES_FAILURE = "LOAD_MOVIES_FAILURE";
+export const SEARCH_MOVIE_BY_ID = "SEARCH_MOVIE_BY_ID";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
@@ -18,5 +19,12 @@ export const loadMoviesSuccess = (movies) => ({
   type: LOAD_MOVIES_SUCCESS,
   payload: {
     movies,
+  },
+});
+
+export const searchMovieByID = (movie) => ({
+  type: SEARCH_MOVIE_BY_ID,
+  payload: {
+    movie,
   },
 });
