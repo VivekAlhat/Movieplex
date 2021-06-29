@@ -8,7 +8,7 @@ import {
 const initialState = {
   isLoading: false,
   movies: { results: [] },
-  search: { poster_path: "", title: "" },
+  search: {},
 };
 
 const rootReducer = (state = initialState, action) => {
