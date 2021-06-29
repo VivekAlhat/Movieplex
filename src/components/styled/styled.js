@@ -79,6 +79,19 @@ export const LoadingContainer = styled.div`
   place-items: center;
 `;
 
+export const MovieImgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const MovieActionsIcons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #dddddd;
+`;
+
 export const MoviesTitle = styled.h1`
   color: #dddddd;
   text-align: right;
@@ -119,4 +132,25 @@ export const MovieContent = styled.div`
   gap: 1rem;
   color: #dddddd;
   padding: 0 3rem;
+`;
+
+export const TagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const Genre = styled.p`
+  padding: 0.5rem 1rem;
+  color: #dddddd;
+  background: #d83a56;
+`;
+
+export const Language = styled(Genre)`
+  background: #03256c;
+`;
+
+export const Company = styled(Genre)`
+  background: #7d5a50;
 `;
