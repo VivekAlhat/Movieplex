@@ -9,11 +9,10 @@ const Cast = ({ movieCast }) => {
     <CastContainer>
       <CastInfo>
         {cast.map((item) => (
-          <CastItem>
+          <CastItem key={item.id}>
             <Avatar
               alt={item.character}
               src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
-              key={item.id}
               style={{ width: "5rem", height: "5rem" }}
             />
             <h3>{item.original_name}</h3>
