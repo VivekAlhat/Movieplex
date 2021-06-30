@@ -6,7 +6,7 @@ const Similar = ({ similarMovies }) => {
   const { results } = similarMovies;
   const similar = results.slice(0, 4);
 
-  return (
+  return similar.length > 0 ? (
     <>
       <h2
         style={{ color: "#dddddd", textAlign: "center", marginBottom: "1rem" }}
@@ -15,7 +15,7 @@ const Similar = ({ similarMovies }) => {
       </h2>
       <MoviesList moviesData={similar} />
     </>
-  );
+  ) : null;
 };
 
 const mapStateToProps = (state) => ({
