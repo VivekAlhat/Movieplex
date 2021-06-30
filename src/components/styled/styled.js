@@ -154,3 +154,26 @@ export const Language = styled(Genre)`
 export const Company = styled(Genre)`
   background: #7d5a50;
 `;
+
+export const CastContainer = styled.div`
+  color: #dddddd;
+  margin-top: 1rem;
+`;
+
+export const CastInfo = styled.div`
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+`;
+
+export const CastItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  gap: 0.5rem;
+`;

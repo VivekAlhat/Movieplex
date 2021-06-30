@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Tooltip } from "@material-ui/core";
+import { Tooltip, Divider } from "@material-ui/core";
 import { searchByID } from "../thunks/thunks";
 import { getSearchedMovieInfo, getLoading } from "../selectors/selectors";
 import {
@@ -16,7 +16,14 @@ import {
 } from "./styled/styled";
 import { AddCircle, FavoriteBorder, Favorite } from "@material-ui/icons";
 import { CircularProgressbar } from "react-circular-progressbar";
+import Cast from "./Cast";
+import styled from "styled-components";
 import Loading from "./Loading";
+
+const LineDivider = styled(Divider)`
+  margin: 1rem 0 !important;
+  border: 1px solid #dddddd1a !important;
+`;
 
 const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
   const movieId = match.params.id;
@@ -29,11 +36,13 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
     <MoviesContainer>
       <MovieInfo>
         <MovieImgContainer>
-          <img
-            style={{ width: "17rem" }}
-            src={`https://image.tmdb.org/t/p/w500/${movieData.poster_path}`}
-            alt={movieData.title}
-          />
+          {movieData.poster_path && (
+            <img
+              style={{ width: "17rem" }}
+              src={`https://image.tmdb.org/t/p/w500/${movieData.poster_path}`}
+              alt={movieData.title}
+            />
+          )}
           <MovieActionsIcons>
             <div style={{ width: 40, height: 40 }}>
               <CircularProgressbar
@@ -61,7 +70,7 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
         <MovieContent>
           <h1>{movieData.title}</h1>
           {movieData.tagline && <p>{movieData.tagline}</p>}
-          <p>{movieData.overview}</p>
+          {movieData.overview && <p>{movieData.overview}</p>}
           <TagsContainer>
             Genres :
             {movieData.genres.map((item, key) => (
@@ -96,6 +105,9 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
           </TagsContainer>
         </MovieContent>
       </MovieInfo>
+      <LineDivider />
+      <Cast />
+      <LineDivider />
     </MoviesContainer>
   );
 
