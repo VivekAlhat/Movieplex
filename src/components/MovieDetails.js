@@ -17,8 +17,9 @@ import {
 import { AddCircle, FavoriteBorder, Favorite } from "@material-ui/icons";
 import { CircularProgressbar } from "react-circular-progressbar";
 import Cast from "./Cast";
-import styled from "styled-components";
 import Loading from "./Loading";
+import Reviews from "./Reviews";
+import styled from "styled-components";
 
 const LineDivider = styled(Divider)`
   margin: 1rem 0 !important;
@@ -107,6 +108,8 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
       </MovieInfo>
       <LineDivider />
       <Cast />
+      <LineDivider />
+      <Reviews />
       <LineDivider />
     </MoviesContainer>
   );

@@ -165,7 +165,7 @@ export const CastInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 1rem;
 `;
 
@@ -176,4 +176,17 @@ export const CastItem = styled.div`
   justify-content: center;
   padding: 1rem 3rem;
   gap: 0.5rem;
+`;
+
+export const ReviewsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+`;
+
+export const ReviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #dddddd;
 `;
