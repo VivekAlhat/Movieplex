@@ -23,7 +23,14 @@ const rootReducer = (state = initialState, action) => {
         search: movie,
       };
     }
-    case SEARCH_BY_QUERY:
+    case SEARCH_BY_QUERY: {
+      const { movies } = payload;
+      return {
+        ...state,
+        isLoading: false,
+        movies: movies,
+      };
+    }
     case LOAD_MOVIES_SUCCESS: {
       const { movies } = payload;
       return {
