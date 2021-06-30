@@ -19,6 +19,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import Cast from "./Cast";
 import Loading from "./Loading";
 import Reviews from "./Reviews";
+import Similar from "./Similar";
 import styled from "styled-components";
 
 const LineDivider = styled(Divider)`
@@ -111,6 +112,7 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
       <LineDivider />
       <Reviews />
       <LineDivider />
+      <Similar />
     </MoviesContainer>
   );
 

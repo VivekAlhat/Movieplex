@@ -1,10 +1,10 @@
 import thunk from "redux-thunk";
-import rootReducer from "../reducers/reducers";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import { createStore, applyMiddleware } from "redux";
 import { persistReducer } from "redux-persist";
 import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "../reducers/reducers";
 
 const persistConfig = {
   key: "root",
