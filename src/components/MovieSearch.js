@@ -3,16 +3,20 @@ import {
   MovieSearchInput,
   SearchButton,
 } from "./styled/styled";
-import styled from "styled-components";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { searchMovieByQuery } from "../thunks/thunks";
 import { Search } from "@material-ui/icons";
 import { useState } from "react";
+import styled from "styled-components";
 
 const SearchIcon = styled(Search)`
   color: white;
 `;
 
-const MovieSearch = () => {
+const MovieSearch = ({ loadMoviesOnSearch }) => {
   const [query, setQuery] = useState("");
+  const history = useHistory();
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -20,6 +24,13 @@ const MovieSearch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (query === "") {
+      alert("Query string should not be empty");
+      history.push("/");
+    } else {
+      loadMoviesOnSearch(query);
+      history.push(`/search/${query}`);
+    }
     setQuery("");
   };
 
@@ -39,4 +50,8 @@ const MovieSearch = () => {
   );
 };
 
-export default MovieSearch;
+const mapDispatchToProps = (dispatch) => ({
+  loadMoviesOnSearch: (query) => dispatch(searchMovieByQuery(query)),
+});
+
+export default connect(null, mapDispatchToProps)(MovieSearch);

@@ -3,12 +3,13 @@ import {
   LOAD_MOVIES_SUCCESS,
   LOAD_MOVIES_PROGRESS,
   SEARCH_MOVIE_BY_ID,
+  SEARCH_BY_QUERY,
 } from "../actions/actions";
 
 const initialState = {
   isLoading: false,
   movies: { results: [] },
-  search: {},
+  search: { movieData: {}, cast: {}, similar: {}, reviews: {} },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,6 +23,7 @@ const rootReducer = (state = initialState, action) => {
         search: movie,
       };
     }
+    case SEARCH_BY_QUERY:
     case LOAD_MOVIES_SUCCESS: {
       const { movies } = payload;
       return {

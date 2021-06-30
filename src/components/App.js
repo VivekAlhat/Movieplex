@@ -29,6 +29,7 @@ function App() {
           <Route path="/favorites" component={Favorites} />
           <Route path="/watchlist" component={WatchList} />
           <Route path="/movies/:id" component={MovieDetails} />
+          <Route path="/search/:query" component={Movies} />
         </Switch>
       </AppContainer>
     </>

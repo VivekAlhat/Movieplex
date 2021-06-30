@@ -3,6 +3,7 @@ import {
   loadMoviesProgress,
   loadMoviesSuccess,
   searchMovieByID,
+  searchByQuery,
 } from "../actions/actions";
 
 export const loadMovies = () => async (dispatch, getState) => {
@@ -44,6 +45,22 @@ export const searchByID = (id) => async (dispatch, getState) => {
     };
 
     dispatch(searchMovieByID(movie));
+  } catch (err) {
+    dispatch(loadMoviesFailure());
+    dispatch(displayAlert(err));
+  }
+};
+
+export const searchMovieByQuery = (query) => async (dispatch, getState) => {
+  try {
+    dispatch(loadMoviesProgress());
+    const response = await fetch(`http://localhost:8000/movies/search/`, {
+      headers: { "Content-Type": "application/json" },
+      method: "post",
+      body: JSON.stringify({ query: query }),
+    });
+    const movies = await response.json();
+    dispatch(searchByQuery(movies));
   } catch (err) {
     dispatch(loadMoviesFailure());
     dispatch(displayAlert(err));
