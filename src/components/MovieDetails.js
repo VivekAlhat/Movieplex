@@ -1,8 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Tooltip, Divider } from "@material-ui/core";
 import { searchByID } from "../thunks/thunks";
+import { Tooltip, Divider } from "@material-ui/core";
+import { ToastContainer, toast } from "react-toastify";
+import { CircularProgressbar } from "react-circular-progressbar";
 import { getSearchedMovieInfo, getLoading } from "../selectors/selectors";
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+  addToFavorites,
+  removeFromFavorites,
+} from "../actions/actions";
 import {
   MoviesContainer,
   MovieImgContainer,
@@ -14,8 +22,12 @@ import {
   Language,
   Company,
 } from "./styled/styled";
-import { AddCircle, FavoriteBorder, Favorite } from "@material-ui/icons";
-import { CircularProgressbar } from "react-circular-progressbar";
+import {
+  AddCircle,
+  AddCircleOutline,
+  FavoriteBorder,
+  Favorite,
+} from "@material-ui/icons";
 import Cast from "./Cast";
 import Loading from "./Loading";
 import Reviews from "./Reviews";
@@ -27,8 +39,24 @@ const LineDivider = styled(Divider)`
   border: 1px solid #dddddd1a !important;
 `;
 
-const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
+const MovieDetails = ({
+  match,
+  loadMovie,
+  movieData,
+  isLoading,
+  addToWatchlist,
+  removeFromWatchlist,
+  addToFavorites,
+  removeFromFavorites,
+}) => {
   const movieId = match.params.id;
+  const [isLiked, setIsLiked] = useState(false);
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
+
+  const addNotify = () => toast.dark("Added to your Watch-List!");
+  const delNotify = () => toast.dark("Removed from your Watch-List");
+  const liked = () => toast.dark("Added to liked movies");
+  const disliked = () => toast.dark("Removed from liked movies");
 
   useEffect(() => {
     loadMovie(movieId);
@@ -36,6 +64,7 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
 
   const Movie = (
     <MoviesContainer>
+      <ToastContainer />
       <MovieInfo>
         <MovieImgContainer>
           {movieData.poster_path && (
@@ -53,20 +82,63 @@ const MovieDetails = ({ match, loadMovie, movieData, isLoading }) => {
                 text={`${movieData.vote_average}%`}
               />
             </div>
-            <Tooltip title="Unlike">
-              <Favorite style={{ cursor: "pointer" }} aria-label="Unlike" />
-            </Tooltip>
 
-            <Tooltip title="Add To Watchlist">
-              <AddCircle
-                style={{ cursor: "pointer" }}
-                aria-label="Add To Watchlist"
-              />
-            </Tooltip>
+            {isLiked ? (
+              <Tooltip
+                title="Unlike"
+                onClick={() => {
+                  removeFromFavorites(movieData.id);
+                  disliked();
+                  setIsLiked(false);
+                }}
+              >
+                <Favorite style={{ cursor: "pointer" }} aria-label="Unlike" />
+              </Tooltip>
+            ) : (
+              <Tooltip
+                title="Like"
+                onClick={() => {
+                  addToFavorites(movieData.id);
+                  liked();
+                  setIsLiked(true);
+                }}
+              >
+                <FavoriteBorder
+                  style={{ cursor: "pointer" }}
+                  aria-label="Like"
+                />
+              </Tooltip>
+            )}
 
-            <Tooltip title="Like">
-              <FavoriteBorder style={{ cursor: "pointer" }} aria-label="Like" />
-            </Tooltip>
+            {isInWatchlist ? (
+              <Tooltip
+                title="Remove From Watchlist"
+                onClick={() => {
+                  removeFromWatchlist(movieData.id);
+                  delNotify();
+                  setIsInWatchlist(false);
+                }}
+              >
+                <AddCircle
+                  style={{ cursor: "pointer" }}
+                  aria-label="Remove From Watchlist"
+                />
+              </Tooltip>
+            ) : (
+              <Tooltip
+                title="Add To Watchlist"
+                onClick={() => {
+                  addToWatchlist(movieData.id);
+                  addNotify();
+                  setIsInWatchlist(true);
+                }}
+              >
+                <AddCircleOutline
+                  style={{ cursor: "pointer" }}
+                  aria-label="Add To Watchlist"
+                />
+              </Tooltip>
+            )}
           </MovieActionsIcons>
         </MovieImgContainer>
         <MovieContent>
@@ -126,6 +198,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadMovie: (id) => dispatch(searchByID(id)),
+  addToWatchlist: (id) => dispatch(addToWatchlist(id)),
+  removeFromWatchlist: (id) => dispatch(removeFromWatchlist(id)),
+  addToFavorites: (id) => dispatch(addToFavorites(id)),
+  removeFromFavorites: (id) => dispatch(removeFromFavorites(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

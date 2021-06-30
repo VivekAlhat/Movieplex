@@ -36,3 +36,31 @@ export const searchByQuery = (movies) => ({
     movies,
   },
 });
+
+export const addToWatchlist = (id) => ({
+  type: ADD_TO_WATCHLIST,
+  payload: {
+    id,
+  },
+});
+
+export const removeFromWatchlist = (id) => ({
+  type: REMOVE_FROM_WATCHLIST,
+  payload: {
+    id,
+  },
+});
+
+export const addToFavorites = (id) => ({
+  type: ADD_FAVORITE,
+  payload: {
+    id,
+  },
+});
+
+export const removeFromFavorites = (id) => ({
+  type: REMOVE_FAVORITE,
+  payload: {
+    id,
+  },
+});
