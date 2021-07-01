@@ -4,7 +4,12 @@ import { searchByID } from "../thunks/thunks";
 import { Tooltip, Divider } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { getSearchedMovieInfo, getLoading } from "../selectors/selectors";
+import {
+  getSearchedMovieInfo,
+  getLoading,
+  getFavorites,
+  getWatchlist,
+} from "../selectors/selectors";
 import {
   addToWatchlist,
   removeFromWatchlist,
@@ -28,6 +33,7 @@ import {
   FavoriteBorder,
   Favorite,
 } from "@material-ui/icons";
+import { includes } from "lodash";
 import Cast from "./Cast";
 import Loading from "./Loading";
 import Reviews from "./Reviews";
@@ -48,10 +54,17 @@ const MovieDetails = ({
   removeFromWatchlist,
   addToFavorites,
   removeFromFavorites,
+  favorites,
+  watchlist,
 }) => {
   const movieId = match.params.id;
-  const [isLiked, setIsLiked] = useState(false);
-  const [isInWatchlist, setIsInWatchlist] = useState(false);
+
+  const [isLiked, setIsLiked] = useState(() => {
+    return includes(favorites, Number(movieId));
+  });
+  const [isInWatchlist, setIsInWatchlist] = useState(() => {
+    return includes(watchlist, Number(movieId));
+  });
 
   const addNotify = () => toast.dark("Added to your Watch-List!");
   const delNotify = () => toast.dark("Removed from your Watch-List");
@@ -67,7 +80,7 @@ const MovieDetails = ({
       <ToastContainer />
       <MovieInfo>
         <MovieImgContainer>
-          {movieData.poster_path && (
+          {movieData.poster_path !== null && (
             <img
               style={{ width: "17rem" }}
               src={`https://image.tmdb.org/t/p/w500/${movieData.poster_path}`}
@@ -194,6 +207,8 @@ const MovieDetails = ({
 const mapStateToProps = (state) => ({
   movieData: getSearchedMovieInfo(state),
   isLoading: getLoading(state),
+  favorites: getFavorites(state),
+  watchlist: getWatchlist(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

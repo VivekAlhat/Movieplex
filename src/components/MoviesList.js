@@ -4,16 +4,19 @@ import { MovieList, MovieItem, MovieImg } from "./styled/styled";
 const MoviesList = ({ moviesData }) => {
   return (
     <MovieList>
-      {moviesData.map((item) => (
-        <MovieItem key={item.id}>
-          <Link to={`/movies/${item.id}`}>
-            <MovieImg
-              src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-              alt={item.title}
-            />
-          </Link>
-        </MovieItem>
-      ))}
+      {moviesData.map(
+        (item) =>
+          item.poster_path !== null && (
+            <MovieItem key={item.id}>
+              <Link to={`/movies/${item.id}`}>
+                <MovieImg
+                  src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                  alt={item.title}
+                />
+              </Link>
+            </MovieItem>
+          )
+      )}
     </MovieList>
   );
 };

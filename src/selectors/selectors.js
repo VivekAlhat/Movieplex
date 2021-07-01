@@ -11,3 +11,7 @@ export const getSearchedMovieCast = (state) => state.search.cast;
 export const getSearchedMovieSimilar = (state) => state.search.similar;
 
 export const getSearchedMovieReviews = (state) => state.search.reviews;
+
+export const getFavorites = (state) => state.favorites;
+
+export const getWatchlist = (state) => state.watchlist;

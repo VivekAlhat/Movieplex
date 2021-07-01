@@ -8,17 +8,20 @@ const Cast = ({ movieCast }) => {
   return (
     <CastContainer>
       <CastInfo>
-        {cast.map((item) => (
-          <CastItem key={item.id}>
-            <Avatar
-              alt={item.character}
-              src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
-              style={{ width: "5rem", height: "5rem" }}
-            />
-            <h3>{item.original_name}</h3>
-            <p>{item.character}</p>
-          </CastItem>
-        ))}
+        {cast.map(
+          (item) =>
+            item.profile_path !== null && (
+              <CastItem key={item.id}>
+                <Avatar
+                  alt={item.character}
+                  src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
+                  style={{ width: "5rem", height: "5rem" }}
+                />
+                <h3>{item.original_name}</h3>
+                <p>{item.character}</p>
+              </CastItem>
+            )
+        )}
       </CastInfo>
     </CastContainer>
   );
