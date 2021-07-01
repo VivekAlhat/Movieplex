@@ -193,3 +193,11 @@ export const ReviewItem = styled.div`
 export const UserCollection = styled.div`
   color: #dddddd;
 `;
+
+export const MoviesFilter = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: #dddddd;
+`;

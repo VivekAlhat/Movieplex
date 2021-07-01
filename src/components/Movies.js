@@ -1,20 +1,47 @@
-import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Select, MenuItem } from "@material-ui/core";
 import { loadMovies, searchByID } from "../thunks/thunks";
 import { getLoading, getMovies } from "../selectors/selectors";
-import { MoviesContainer, LoadingContainer } from "./styled/styled";
+import {
+  MoviesContainer,
+  LoadingContainer,
+  MoviesFilter,
+} from "./styled/styled";
 import Loading from "./Loading";
 import MoviesList from "./MoviesList";
 
 const Movies = ({ moviesData, isLoading, startLoadingMovies, loadMovie }) => {
+  const [filter, setFilter] = useState("popular");
+
   useEffect(() => {
     startLoadingMovies();
     loadMovie(527063);
   }, [startLoadingMovies, loadMovie]);
 
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+  };
+
   const MoviesListData = (
     <MoviesContainer>
+      <MoviesFilter>
+        <h3>Filter By :&nbsp;</h3>
+        <Select
+          style={{ color: "#dddddd", background: "none", width: "10rem" }}
+          value={filter}
+          onChange={handleChange}
+          displayEmpty
+          inputProps={{ "aria-label": "Without label" }}
+        >
+          <MenuItem value={"latest"}>Latest</MenuItem>
+          <MenuItem value={"nowplaying"}>Now Playing</MenuItem>
+          <MenuItem value={"popular"}>Popular</MenuItem>
+          <MenuItem value={"toprated"}>Top Rated</MenuItem>
+          <MenuItem value={"upcoming"}>Upcoming</MenuItem>
+        </Select>
+      </MoviesFilter>
       {moviesData.length > 0 ? (
         <MoviesList moviesData={moviesData} />
       ) : (
