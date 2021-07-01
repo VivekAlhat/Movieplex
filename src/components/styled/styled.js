@@ -100,10 +100,9 @@ export const MoviesTitle = styled.h1`
 
 export const MovieList = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 2rem 5rem;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
 `;
 
 export const MovieItem = styled.div`
@@ -112,7 +111,7 @@ export const MovieItem = styled.div`
 
 export const MovieImg = styled.img`
   cursor: pointer;
-  width: 14rem;
+  width: 12rem;
   height: 100%;
   transition: all linear 200ms;
 
@@ -188,5 +187,9 @@ export const ReviewItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  color: #dddddd;
+`;
+
+export const UserCollection = styled.div`
   color: #dddddd;
 `;

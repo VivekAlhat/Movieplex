@@ -3,8 +3,7 @@ import { Switch, Route, useLocation } from "react-router-dom";
 import { AppContainer } from "./styled/styled";
 import Sidebar from "./Sidebar";
 import Movies from "./Movies";
-import Favorites from "./Favorites";
-import WatchList from "./WatchList";
+import UserLists from "./UserLists";
 import MovieSearch from "./MovieSearch";
 import MovieDetails from "./MovieDetails";
 
@@ -24,8 +23,8 @@ function App() {
         <MovieSearch />
         <Switch>
           <Route path="/" exact component={Movies} />
-          <Route path="/favorites" component={Favorites} />
-          <Route path="/watchlist" component={WatchList} />
+          <Route path="/favorites" component={UserLists} />
+          <Route path="/watchlist" component={UserLists} />
           <Route path="/movies/:id" component={MovieDetails} />
           <Route path="/search/:query" component={Movies} />
         </Switch>
