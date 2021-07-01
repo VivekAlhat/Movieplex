@@ -33,7 +33,7 @@ import {
   FavoriteBorder,
   Favorite,
 } from "@material-ui/icons";
-import { includes } from "lodash";
+import { find } from "lodash";
 import Cast from "./Cast";
 import Loading from "./Loading";
 import Reviews from "./Reviews";
@@ -60,16 +60,16 @@ const MovieDetails = ({
   const movieId = match.params.id;
 
   const [isLiked, setIsLiked] = useState(() => {
-    return includes(favorites, Number(movieId));
+    return find(favorites, { id: Number(movieId) });
   });
   const [isInWatchlist, setIsInWatchlist] = useState(() => {
-    return includes(watchlist, Number(movieId));
+    return find(watchlist, { id: Number(movieId) });
   });
 
-  const addNotify = () => toast.dark("Added to your Watch-List!");
-  const delNotify = () => toast.dark("Removed from your Watch-List");
-  const liked = () => toast.dark("Added to liked movies");
-  const disliked = () => toast.dark("Removed from liked movies");
+  const addNotify = () => toast.dark("Added To Watchlist!");
+  const delNotify = () => toast.dark("Removed From Watchlist");
+  const liked = () => toast.dark("Added To Favorites");
+  const disliked = () => toast.dark("Removed From Favorites");
 
   useEffect(() => {
     loadMovie(movieId);
@@ -105,13 +105,20 @@ const MovieDetails = ({
                   setIsLiked(false);
                 }}
               >
-                <Favorite style={{ cursor: "pointer" }} aria-label="Unlike" />
+                <Favorite
+                  style={{ cursor: "pointer", color: "#D83A56" }}
+                  aria-label="Unlike"
+                />
               </Tooltip>
             ) : (
               <Tooltip
                 title="Like"
                 onClick={() => {
-                  addToFavorites(movieData.id);
+                  addToFavorites({
+                    id: movieData.id,
+                    title: movieData.title,
+                    poster_path: movieData.poster_path,
+                  });
                   liked();
                   setIsLiked(true);
                 }}
@@ -133,7 +140,7 @@ const MovieDetails = ({
                 }}
               >
                 <AddCircle
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "#FFE194" }}
                   aria-label="Remove From Watchlist"
                 />
               </Tooltip>
@@ -141,7 +148,11 @@ const MovieDetails = ({
               <Tooltip
                 title="Add To Watchlist"
                 onClick={() => {
-                  addToWatchlist(movieData.id);
+                  addToWatchlist({
+                    id: movieData.id,
+                    title: movieData.title,
+                    poster_path: movieData.poster_path,
+                  });
                   addNotify();
                   setIsInWatchlist(true);
                 }}
@@ -213,9 +224,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadMovie: (id) => dispatch(searchByID(id)),
-  addToWatchlist: (id) => dispatch(addToWatchlist(id)),
+  addToWatchlist: (movie) => dispatch(addToWatchlist(movie)),
   removeFromWatchlist: (id) => dispatch(removeFromWatchlist(id)),
-  addToFavorites: (id) => dispatch(addToFavorites(id)),
+  addToFavorites: (movie) => dispatch(addToFavorites(movie)),
   removeFromFavorites: (id) => dispatch(removeFromFavorites(id)),
 });
 

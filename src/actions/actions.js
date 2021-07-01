@@ -37,10 +37,10 @@ export const searchByQuery = (movies) => ({
   },
 });
 
-export const addToWatchlist = (id) => ({
+export const addToWatchlist = (movie) => ({
   type: ADD_TO_WATCHLIST,
   payload: {
-    id,
+    movie,
   },
 });
 
@@ -51,10 +51,10 @@ export const removeFromWatchlist = (id) => ({
   },
 });
 
-export const addToFavorites = (id) => ({
+export const addToFavorites = (movie) => ({
   type: ADD_FAVORITE,
   payload: {
-    id,
+    movie,
   },
 });
 

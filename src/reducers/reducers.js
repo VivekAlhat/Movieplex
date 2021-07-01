@@ -1,3 +1,4 @@
+import { find } from "lodash";
 import {
   LOAD_MOVIES_FAILURE,
   LOAD_MOVIES_SUCCESS,
@@ -58,56 +59,44 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case ADD_TO_WATCHLIST: {
-      const { id } = payload;
-      if (state.watchlist.includes(id)) {
+      const { movie } = payload;
+      if (!find(state.watchlist, { id: movie.id })) {
         return {
           ...state,
+          watchlist: state.watchlist.concat(movie),
         };
       } else {
         return {
           ...state,
-          watchlist: state.watchlist.concat(id),
         };
       }
     }
     case REMOVE_FROM_WATCHLIST: {
       const { id } = payload;
-      if (state.watchlist.includes(id)) {
-        return {
-          ...state,
-          watchlist: state.watchlist.filter((item) => item !== id),
-        };
-      } else {
-        return {
-          ...state,
-        };
-      }
+      return {
+        ...state,
+        watchlist: state.watchlist.filter((item) => item.id !== id),
+      };
     }
     case ADD_FAVORITE: {
-      const { id } = payload;
-      if (state.favorites.includes(id)) {
+      const { movie } = payload;
+      if (!find(state.favorites, { id: movie.id })) {
         return {
           ...state,
+          favorites: state.favorites.concat(movie),
         };
       } else {
         return {
           ...state,
-          favorites: state.favorites.concat(id),
         };
       }
     }
     case REMOVE_FAVORITE: {
       const { id } = payload;
-      if (state.favorites.includes(id)) {
-        return {
-          ...state,
-          favorites: state.favorites.filter((item) => item !== id),
-        };
-      } else {
-        return {
-          ...state,
-        };
-      }
+      return {
+        ...state,
+        favorites: state.favorites.filter((item) => item.id !== id),
+      };
     }
     default: {
       return state;

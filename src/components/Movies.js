@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { loadMovies } from "../thunks/thunks";
+import { loadMovies, searchByID } from "../thunks/thunks";
 import { getLoading, getMovies } from "../selectors/selectors";
 import { MoviesContainer } from "./styled/styled";
 import Loading from "./Loading";
 import MoviesList from "./MoviesList";
 
-const Movies = ({ moviesData, isLoading, startLoadingMovies }) => {
+const Movies = ({ moviesData, isLoading, startLoadingMovies, loadMovie }) => {
   useEffect(() => {
     startLoadingMovies();
-  }, [startLoadingMovies]);
+    loadMovie(527063);
+  }, [startLoadingMovies,loadMovie]);
 
   const MoviesListData = (
     <MoviesContainer>
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   startLoadingMovies: () => dispatch(loadMovies()),
+  loadMovie: (id) => dispatch(searchByID(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);
