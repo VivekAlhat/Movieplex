@@ -5,7 +5,7 @@ import {
   SidebarLogo,
 } from "./styled/styled";
 import { Link } from "react-router-dom";
-import { WatchLater, Favorite, Subscriptions, Movie } from "@material-ui/icons";
+import { WatchLater, Favorite, Movie } from "@material-ui/icons";
 import styled from "styled-components";
 
 const NavLink = styled(Link)`
@@ -32,19 +32,6 @@ const Sidebar = ({ selected }) => {
             <SidebarOptionItem>
               <Movie />
               Movies
-            </SidebarOptionItem>
-          )}
-        </NavLink>
-        <NavLink to="/genres">
-          {selected === "/genres" ? (
-            <SidebarOptionItemSelected>
-              <Subscriptions />
-              Genres
-            </SidebarOptionItemSelected>
-          ) : (
-            <SidebarOptionItem>
-              <Subscriptions />
-              Genres
             </SidebarOptionItem>
           )}
         </NavLink>

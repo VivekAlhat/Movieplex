@@ -3,7 +3,6 @@ import { Switch, Route, useLocation } from "react-router-dom";
 import { AppContainer } from "./styled/styled";
 import Sidebar from "./Sidebar";
 import Movies from "./Movies";
-import Genres from "./Genres";
 import Favorites from "./Favorites";
 import WatchList from "./WatchList";
 import MovieSearch from "./MovieSearch";
@@ -25,7 +24,6 @@ function App() {
         <MovieSearch />
         <Switch>
           <Route path="/" exact component={Movies} />
-          <Route path="/genres" component={Genres} />
           <Route path="/favorites" component={Favorites} />
           <Route path="/watchlist" component={WatchList} />
           <Route path="/movies/:id" component={MovieDetails} />
