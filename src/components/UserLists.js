@@ -8,6 +8,7 @@ import {
   MovieImgContainer,
   MovieList,
 } from "./styled/styled";
+import Empty from "./Empty";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
@@ -30,35 +31,39 @@ const UserLists = ({
 
   return (
     <MoviesContainer>
-      <UserCollection>
-        <MovieList>
-          {collection.map((item) => (
-            <MovieCollectionItem key={item.id}>
-              <Link to={`/movies/${item.id}`}>
-                <img
-                  style={{ width: "14rem" }}
-                  src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                  alt={item.title}
-                />
-              </Link>
-              <p style={{ textAlign: "center" }}>{item.title}</p>
-              <Button
-                variant="contained"
-                color="secondary"
-                startIcon={<Delete />}
-                size="small"
-                onClick={() => {
-                  location.pathname === "/favorites"
-                    ? removeFromFavorites(item.id)
-                    : removeFromWatchlist(item.id);
-                }}
-              >
-                Remove
-              </Button>
-            </MovieCollectionItem>
-          ))}
-        </MovieList>
-      </UserCollection>
+      {collection.length === 0 ? (
+        <Empty />
+      ) : (
+        <UserCollection>
+          <MovieList>
+            {collection.map((item) => (
+              <MovieCollectionItem key={item.id}>
+                <Link to={`/movies/${item.id}`}>
+                  <img
+                    style={{ width: "14rem" }}
+                    src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                    alt={item.title}
+                  />
+                </Link>
+                <p style={{ textAlign: "center" }}>{item.title}</p>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<Delete />}
+                  size="small"
+                  onClick={() => {
+                    location.pathname === "/favorites"
+                      ? removeFromFavorites(item.id)
+                      : removeFromWatchlist(item.id);
+                  }}
+                >
+                  Remove
+                </Button>
+              </MovieCollectionItem>
+            ))}
+          </MovieList>
+        </UserCollection>
+      )}
     </MoviesContainer>
   );
 };
