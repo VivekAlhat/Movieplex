@@ -1,5 +1,7 @@
 export const getMovies = (state) => state.movies.results;
 
+export const getTotalPages = (state) => state.movies.total_pages;
+
 export const getLoading = (state) => state.isLoading;
 
 export const getSearchedMovie = (state) => state.search;

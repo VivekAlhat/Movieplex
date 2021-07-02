@@ -6,10 +6,12 @@ import {
   searchByQuery,
 } from "../actions/actions";
 
-export const loadMovies = () => async (dispatch, getState) => {
+export const loadMovies = (category, page) => async (dispatch, getState) => {
   try {
     dispatch(loadMoviesProgress());
-    const response = await fetch(`http://localhost:8000/movies/popular`);
+    const response = await fetch(
+      `http://localhost:8000/movies/${category}/${page}`
+    );
     const movies = await response.json();
     dispatch(loadMoviesSuccess(movies));
   } catch (err) {
