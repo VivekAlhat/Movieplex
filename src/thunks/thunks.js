@@ -6,12 +6,12 @@ import {
   searchByQuery,
 } from "../actions/actions";
 
+const API_URI = "https://movieplex-backend.herokuapp.com";
+
 export const loadMovies = (category, page) => async (dispatch, getState) => {
   try {
     dispatch(loadMoviesProgress());
-    const response = await fetch(
-      `http://localhost:8000/movies/${category}/${page}`
-    );
+    const response = await fetch(`${API_URI}/movies/${category}/${page}`);
     const movies = await response.json();
     dispatch(loadMoviesSuccess(movies));
   } catch (err) {
@@ -23,20 +23,16 @@ export const loadMovies = (category, page) => async (dispatch, getState) => {
 export const searchByID = (id) => async (dispatch, getState) => {
   try {
     dispatch(loadMoviesProgress());
-    const response = await fetch(`http://localhost:8000/movies/find/${id}`);
+    const response = await fetch(`${API_URI}/movies/find/${id}`);
     const movieData = await response.json();
 
-    const simres = await fetch(
-      `http://localhost:8000/movies/find/similar/${id}`
-    );
+    const simres = await fetch(`${API_URI}/movies/find/similar/${id}`);
     const similar = await simres.json();
 
-    const castres = await fetch(`http://localhost:8000/movies/find/cast/${id}`);
+    const castres = await fetch(`${API_URI}/movies/find/cast/${id}`);
     const cast = await castres.json();
 
-    const revres = await fetch(
-      `http://localhost:8000/movies/find/reviews/${id}`
-    );
+    const revres = await fetch(`${API_URI}/movies/find/reviews/${id}`);
     const reviews = await revres.json();
 
     const movie = {
@@ -56,7 +52,7 @@ export const searchByID = (id) => async (dispatch, getState) => {
 export const searchMovieByQuery = (query) => async (dispatch, getState) => {
   try {
     dispatch(loadMoviesProgress());
-    const response = await fetch(`http://localhost:8000/movies/search/`, {
+    const response = await fetch(`${API_URI}/movies/search/`, {
       headers: { "Content-Type": "application/json" },
       method: "post",
       body: JSON.stringify({ query: query }),
