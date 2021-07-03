@@ -5,8 +5,11 @@ import {
 } from "./styled/styled";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toggleTheme } from "../actions/actions";
+import { getTheme } from "../selectors/selectors";
 import { searchMovieByQuery } from "../thunks/thunks";
-import { Search } from "@material-ui/icons";
+import { Button } from "@material-ui/core";
+import { Search, Brightness7, Brightness3 } from "@material-ui/icons";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -14,7 +17,7 @@ const SearchIcon = styled(Search)`
   color: white;
 `;
 
-const MovieSearch = ({ loadMoviesOnSearch }) => {
+const MovieSearch = ({ loadMoviesOnSearch, theme, toggleTheme }) => {
   const [query, setQuery] = useState("");
   const history = useHistory();
 
@@ -46,12 +49,28 @@ const MovieSearch = ({ loadMoviesOnSearch }) => {
         />
         <SearchButton></SearchButton>
       </form>
+      <>
+        {theme === "light" ? (
+          <Button onClick={toggleTheme}>
+            <Brightness3 />
+          </Button>
+        ) : (
+          <Button onClick={toggleTheme}>
+            <Brightness7 />
+          </Button>
+        )}
+      </>
     </MovieSearchBar>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  loadMoviesOnSearch: (query) => dispatch(searchMovieByQuery(query)),
+const mapStateToProps = (state) => ({
+  theme: getTheme(state),
 });
 
-export default connect(null, mapDispatchToProps)(MovieSearch);
+const mapDispatchToProps = (dispatch) => ({
+  loadMoviesOnSearch: (query) => dispatch(searchMovieByQuery(query)),
+  toggleTheme: () => dispatch(toggleTheme()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieSearch);

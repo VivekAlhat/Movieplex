@@ -17,3 +17,5 @@ export const getSearchedMovieReviews = (state) => state.search.reviews;
 export const getFavorites = (state) => state.favorites;
 
 export const getWatchlist = (state) => state.watchlist;
+
+export const getTheme = (state) => state.theme;

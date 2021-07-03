@@ -9,9 +9,11 @@ import {
   REMOVE_FROM_WATCHLIST,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
+  TOGGLE_THEME,
 } from "../actions/actions";
 
 const initialState = {
+  theme: "light",
   isLoading: false,
   movies: { results: [] },
   search: { movieData: {}, cast: {}, similar: {}, reviews: {} },
@@ -96,6 +98,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         favorites: state.favorites.filter((item) => item.id !== id),
+      };
+    }
+    case TOGGLE_THEME: {
+      return {
+        ...state,
+        theme: state.theme === "light" ? "dark" : "light",
       };
     }
     default: {

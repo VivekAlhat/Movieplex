@@ -7,6 +7,7 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
 export const REMOVE_FROM_WATCHLIST = "REMOVE_FROM_WATCHLIST";
+export const TOGGLE_THEME = "TOGGLE_THEME";
 
 export const loadMoviesProgress = () => ({
   type: LOAD_MOVIES_PROGRESS,
@@ -63,4 +64,8 @@ export const removeFromFavorites = (id) => ({
   payload: {
     id,
   },
+});
+
+export const toggleTheme = () => ({
+  type: TOGGLE_THEME,
 });
